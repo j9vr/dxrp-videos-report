@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini Streamable Clone</title>
+  <title>Streamable Clone</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
 </head>
 <body>
   <div class="container">
-    <h1>Mini Streamable Clone</h1>
-
+    <h1>Streamable Clone</h1>
     <input type="file" id="videoInput" accept="video/*">
     <button id="uploadBtn">Upload & Play</button>
 
