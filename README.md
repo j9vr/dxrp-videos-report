@@ -1,67 +1,28 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #111;
-  color: #eee;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Streamable Clone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Mini Streamable Clone</h1>
 
-.container {
-  max-width: 700px;
-  width: 100%;
-}
+    <input type="file" id="videoInput" accept="video/*">
+    <button id="uploadBtn">Upload & Play</button>
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
+    <div class="video-container">
+      <video id="videoPlayer" controls></video>
+    </div>
 
-input, button {
-  padding: 10px;
-  margin: 5px 0;
-  width: 100%;
-  box-sizing: border-box;
-}
+    <div id="videoList">
+      <h2>Uploaded Videos</h2>
+      <ul id="videos"></ul>
+    </div>
+  </div>
 
-button {
-  background-color: #28a745;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #218838;
-}
-
-.video-container {
-  margin-top: 20px;
-  text-align: center;
-}
-
-video {
-  width: 100%;
-  max-height: 400px;
-  background-color: black;
-}
-
-#videoList ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-#videoList li {
-  margin: 5px 0;
-}
-
-#videoList li button {
-  width: auto;
-  margin-left: 10px;
-  background-color: #007bff;
-}
-
-#videoList li button:hover {
-  background-color: #0056b3;
-}
+  <script src="script.js"></script>
+</body>
+</html>
