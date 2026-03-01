@@ -32,3 +32,66 @@ a { color: #0d6efd; text-decoration: underline; }
 <script src="script.js"></script>
 </body>
 </html>
+// ==== Replace this with YOUR Firebase config ====
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const storage = firebase.storage();
+
+const videoInput = document.getElementById('videoInput');
+const uploadBtn = document.getElementById('uploadBtn');
+const videoPlayer = document.getElementById('videoPlayer');
+const videosList = document.getElementById('videos');
+
+let videos = [];
+
+function renderVideos() {
+  videosList.innerHTML = '';
+  videos.forEach(v => {
+    const li = document.createElement('li');
+    li.textContent = v.name + ' → ';
+
+    const playBtn = document.createElement('button');
+    playBtn.textContent = 'Play';
+    playBtn.onclick = () => { videoPlayer.src = v.url; videoPlayer.play(); }
+
+    const link = document.createElement('a');
+    link.href = v.url;
+    link.target = '_blank';
+    link.textContent = 'Share URL';
+
+    li.appendChild(playBtn);
+    li.appendChild(document.createTextNode(' '));
+    li.appendChild(link);
+    videosList.appendChild(li);
+  });
+}
+
+uploadBtn.onclick = () => {
+  const file = videoInput.files[0];
+  if (!file) return alert('Select a video');
+
+  const storageRef = storage.ref('videos/' + Date.now() + '_' + file.name);
+  const uploadTask = storageRef.put(file);
+
+  uploadTask.on('state_changed',
+    snapshot => {}, 
+    error => console.error(error),
+    () => {
+      uploadTask.snapshot.ref.getDownloadURL().then(url => {
+        videos.push({ name: file.name, url });
+        renderVideos();
+        videoPlayer.src = url;
+        videoPlayer.play();
+        videoInput.value = '';
+      });
+    }
+  );
+};
